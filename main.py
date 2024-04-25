@@ -1,19 +1,8 @@
 import pygame
 import os
+from player import Dino, SCREEN
 
 pygame.init()
-
-SCREEN_HEIGHT = 600
-SCREEN_WIDTH = 1100
-SCREEN = pygame.display.set_mode(SCREEN_WIDTH, SCREEN_HEIGHT)
-
-RUN = [pygame.image.load(os.path.join("Assets/Dino", "DinoRun1.png")),
-           pygame.image.load(os.path.join("Assets/Dino", "DinoRun2.png"))]
-
-JUMP = [pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))]
-
-DUCK = [pygame.image.load(os.path.join("Assets/Dino", "DinDuck1.png")),
-           pygame.image.load(os.path.join("Assets/Dino", "DinoDuck2.png"))]
 
 SMALL_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus1.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png")),
@@ -31,3 +20,27 @@ CLOUD = [pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))]
 BG = [pygame.image.load(os.path.join("Assets/Other", "Track.png"))]
 
 #add USA later
+
+
+def main():
+    run = True
+    clock = pygame.time.Clock()
+    player = Dino()
+
+    while run:
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                run = False
+
+        SCREEN.fill((255, 255, 255))
+        user_input = pygame.key.get_pressed()
+
+        player.draw(SCREEN)
+        player.update(user_input)
+
+        clock.tick(30)
+        pygame.display.update()
+
+
+
+main()
