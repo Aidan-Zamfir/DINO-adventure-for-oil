@@ -1,7 +1,6 @@
 import pygame
 import os
 import random
-# from player import Dino, SCREEN
 
 pygame.init()
 
@@ -13,28 +12,21 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 RUN = [pygame.image.load(os.path.join("Assets/Dino", "DinoRun1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoRun2.png"))]
-
 DUCK = [pygame.image.load(os.path.join("Assets/Dino", "DinoDuck1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoDuck2.png"))]
-
 JUMP = [pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))]
-
 SMALL_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus1.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus3.png"))]
-
 LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus2.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus3.png"))]
-
 BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
             pygame.image.load(os.path.join("Assets/Bird", "Bird2.png"))]
-
 CLOUD = [pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))]
-
 BG = [pygame.image.load(os.path.join("Assets/Other", "Track.png"))]
 
-#add USA later
+#-------------------- add USA later --------------------
 
 class Dino:
     X_POS = 80
@@ -144,7 +136,6 @@ def main():
 
         clock.tick(30)
         pygame.display.update()
-
 
 
 main()
