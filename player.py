@@ -79,7 +79,7 @@ class Dino:
         self.step_index += 1
 
     def jump(self):
-        self.image = self.jump_img
+        self.image = self.jump_img[0]
         if self.dino_jump:
             self.dino_rect.y -= self.jump_velocity * 4
             self.jump_velocity -= 0.8
