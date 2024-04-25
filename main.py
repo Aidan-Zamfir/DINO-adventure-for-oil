@@ -14,7 +14,7 @@ RUN = [pygame.image.load(os.path.join("Assets/Dino", "DinoRun1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoRun2.png"))]
 DUCK = [pygame.image.load(os.path.join("Assets/Dino", "DinoDuck1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoDuck2.png"))]
-JUMP = [pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))]
+JUMP = pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))
 SMALL_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus1.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus3.png"))]
@@ -23,8 +23,8 @@ LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus3.png"))]
 BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
             pygame.image.load(os.path.join("Assets/Bird", "Bird2.png"))]
-CLOUD = [pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))]
-BG = [pygame.image.load(os.path.join("Assets/Other", "Track.png"))]
+CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
+BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
 
 #-------------------- add USA later --------------------
 
@@ -92,7 +92,7 @@ class Dino:
         self.step_index += 1
 
     def jump(self):
-        self.image = self.jump_img[0]
+        self.image = self.jump_img
         if self.dino_jump:
             self.dino_rect.y -= self.jump_velocity * 4
             self.jump_velocity -= 0.8
@@ -113,15 +113,34 @@ class Cloud:
 
     def update(self):
         self.x -= game_speed
+        if self.x < -self.width:
+            self.x = SCREEN_WIDTH + random.randint(2500, 3000)
+            self.y = random.randint(50, 100)
 
-    def draw(self):
-        pass
+    def draw(self, SCREEN):
+        SCREEN.blit(self.image, (self.x, self.y))
+
 def main():
-    global game_speed
+    global game_speed, x_pos_bg, y_pos_bg
     run = True
     clock = pygame.time.Clock()
     player = Dino()
+    cloud = Cloud()
     game_speed = 14
+    x_pos_bg = 0
+    y_pos_bg = 380
+
+    def background():
+        global x_pos_bg, y_pos_bg
+
+        image_width = BG.get_width()
+        SCREEN.blit(BG, (x_pos_bg, y_pos_bg))
+        SCREEN.blit(BG, (image_width + x_pos_bg, y_pos_bg))
+
+        if x_pos_bg <= -image_width:
+            SCREEN.blit(BG, (image_width + x_pos_bg, y_pos_bg))
+            x_pos_bg = 0
+        x_pos_bg -= game_speed
 
     while run:
         for ev in pygame.event.get():
@@ -133,6 +152,11 @@ def main():
 
         player.draw(SCREEN)
         player.update(user_input)
+
+        background()
+
+        cloud.draw(SCREEN)
+        cloud.update()
 
         clock.tick(30)
         pygame.display.update()
