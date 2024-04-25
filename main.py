@@ -172,6 +172,7 @@ def main():
     points = 0
     font = pygame.font.Font('freesansbold.ttf', 20)
     obstacles = []
+    death_count = 0
 
     def score():
         global points, game_speed
@@ -219,7 +220,9 @@ def main():
             i.draw(SCREEN)
             i.update()
             if player.dino_rect.colliderect(i.rect):
-                pygame.draw.rect(SCREEN, (255, 0, 0), player.dino_rect, 2)
+                pygame.time.delay(2000)
+                death_count += 1
+                menu(death_count)
 
         background()
 
@@ -232,4 +235,31 @@ def main():
         pygame.display.update()
 
 
-main()
+def menu(death_count):
+    global points
+    run = True
+
+    while True:
+        SCREEN.fill((255, 255, 255))
+        font = pygame.font.Font("freesansbold.ttf", 30)
+
+        if death_count == 0:
+            text = font.render("Press Any Key", True, (0, 0 ,0))
+        elif death_count > 0:
+            text = font.render("Press Any Key", True, (0, 0 ,0))
+            score = font.render("SCORE: " + str(points), True, (0, 0 ,0))
+            score_rect = score.get_rect()
+            score_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50)
+            SCREEN.blit(score, score_rect)
+        text_rect = text.get_rect()
+        text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        SCREEN.blit(text, text_rect)
+        pygame.display.update()
+        for i in pygame.event.get():
+            if i.type == pygame.QUIT:
+                run = False
+            if i.type == pygame.KEYDOWN:
+                main()
+
+
+menu(death_count=0)
