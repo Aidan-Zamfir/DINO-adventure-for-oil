@@ -121,7 +121,7 @@ class Cloud:
         SCREEN.blit(self.image, (self.x, self.y))
 
 def main():
-    global game_speed, x_pos_bg, y_pos_bg
+    global game_speed, x_pos_bg, y_pos_bg, points
     run = True
     clock = pygame.time.Clock()
     player = Dino()
@@ -129,6 +129,19 @@ def main():
     game_speed = 14
     x_pos_bg = 0
     y_pos_bg = 380
+    points = 0
+    font = pygame.font.Font('freesansbold.ttf', 20)
+
+    def score():
+        global points, game_speed
+        points += 1
+        if points % 100 == 0:
+            game_speed += 0.5
+
+        text = font.render("SCORE: " + str(points), True, (0, 0 ,0))
+        text_rect = text.get_rect()
+        text_rect.center = (1000, 40)
+        SCREEN.blit(text, text_rect)
 
     def background():
         global x_pos_bg, y_pos_bg
@@ -157,6 +170,8 @@ def main():
 
         cloud.draw(SCREEN)
         cloud.update()
+
+        score()
 
         clock.tick(30)
         pygame.display.update()
