@@ -160,9 +160,11 @@ class Bird(Obstacles):
         SCREEN.blit(self.image[self.index//5], self.rect)
         self.index += 1
 
+
 def main():
+    #Vars
     global game_speed, x_pos_bg, y_pos_bg, points, obstacles
-    run = True
+    run = True #for while loop
     clock = pygame.time.Clock()
     player = Dino()
     cloud = Cloud()
@@ -174,7 +176,7 @@ def main():
     obstacles = []
     death_count = 0
 
-    def score():
+    def score(): #tracks score on screen
         global points, game_speed
         points += 1
         if points % 100 == 0:
@@ -185,7 +187,7 @@ def main():
         text_rect.center = (1000, 40)
         SCREEN.blit(text, text_rect)
 
-    def background():
+    def background(): #dispalys bg
         global x_pos_bg, y_pos_bg
 
         image_width = BG.get_width()
@@ -197,6 +199,10 @@ def main():
             x_pos_bg = 0
         x_pos_bg -= game_speed
 
+    def crudeOil():
+        pass
+
+    #game running:
     while run:
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
@@ -205,26 +211,27 @@ def main():
         SCREEN.fill((255, 255, 255))
         user_input = pygame.key.get_pressed()
 
-        player.draw(SCREEN)
-        player.update(user_input)
+        player.draw(SCREEN) #draws dino on screen (and keeps drawing it
+        player.update(user_input) #update posotion of din (and hit box)
 
+        #add cacti / birds  to obstacle list
         if len(obstacles) == 0:
             if random.randint(0, 2) == 0:
-                obstacles.append(SmallCac(SMALL_CAC))
+                obstacles.append(SmallCac(SMALL_CAC)) #adds small cactus as first item in list
             elif random.randint(0, 2) == 1:
                 obstacles.append(LargeCac(LARGE_CAC))
             elif random.randint(0, 2) == 2:
                 obstacles.append(Bird(BIRD))
 
-        for i in obstacles:
-            i.draw(SCREEN)
+        for i in obstacles: #takes items in obstacle list
+            i.draw(SCREEN) #draws item
             i.update()
-            if player.dino_rect.colliderect(i.rect):
-                pygame.time.delay(2000)
+            if player.dino_rect.colliderect(i.rect): #detect collision with objects
+                pygame.time.delay(1000)
                 death_count += 1
                 menu(death_count)
 
-        background()
+        background() #calls bg func to display bg
 
         cloud.draw(SCREEN)
         cloud.update()
@@ -233,6 +240,9 @@ def main():
 
         clock.tick(30)
         pygame.display.update()
+
+
+
 
 
 def menu(death_count):
