@@ -1,5 +1,6 @@
 import os
 import pygame
+# from main import SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN
 
 #GLOBAL VARS:
 SCREEN_HEIGHT = 600
