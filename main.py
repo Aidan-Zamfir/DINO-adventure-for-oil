@@ -23,8 +23,14 @@ LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus3.png"))]
 BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
             pygame.image.load(os.path.join("Assets/Bird", "Bird2.png"))]
+PLANE = [pygame.image.load(os.path.join("Assets/Plane", "Freedom1.png")),
+            pygame.image.load(os.path.join("Assets/Plane", "Freedom2.png")),
+         pygame.image.load(os.path.join("Assets/Plane", "LiberationUnit.png"))]
+ARMY = [pygame.image.load(os.path.join("Assets/Army", "Army.png")),
+            pygame.image.load(os.path.join("Assets/Army", "Tank.png"))]
 CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
 BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
+
 
 #-------------------- add USA later --------------------#
 
@@ -199,8 +205,6 @@ def main():
             x_pos_bg = 0
         x_pos_bg -= game_speed
 
-    def crudeOil():
-        pass
 
     #game running:
     while run:
