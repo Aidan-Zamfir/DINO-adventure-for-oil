@@ -26,7 +26,7 @@ BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
 CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
 BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
 
-#-------------------- add USA later --------------------
+#-------------------- add USA later --------------------#
 
 class Dino:
     X_POS = 80
@@ -120,7 +120,7 @@ class Cloud:
     def draw(self, SCREEN):
         SCREEN.blit(self.image, (self.x, self.y))
 
-class Obstacles:
+class Obstacles: #add so that all obstacles change to military AFTER 1300 score
     def __init__(self, image, type):
         self.image = image
         self.type = type
@@ -240,9 +240,6 @@ def main():
 
         clock.tick(30)
         pygame.display.update()
-
-
-
 
 
 def menu(death_count):
