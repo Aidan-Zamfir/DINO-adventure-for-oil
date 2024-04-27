@@ -26,12 +26,11 @@ PLANE = [pygame.image.load(os.path.join("Assets/Plane", "Freedom1.png")),
             pygame.image.load(os.path.join("Assets/Plane", "Freedom2.png")),
          pygame.image.load(os.path.join("Assets/Plane", "LiberationUnit.png"))]
 ARMY = [pygame.image.load(os.path.join("Assets/Army", "Army.png")),
-            pygame.image.load(os.path.join("Assets/Army", "Tank.png"))]
+            pygame.image.load(os.path.join("Assets/Army", "TankM.png")),
+        pygame.image.load(os.path.join("Assets/Army", "Tent.png"))]
 CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
 BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
 
-
-#-------------------- add USA later --------------------#
 
 class Dino:
     X_POS = 80
@@ -125,7 +124,7 @@ class Cloud:
     def draw(self, SCREEN):
         SCREEN.blit(self.image, (self.x, self.y))
 
-class Obstacles: #add so that all obstacles change to military AFTER 1300 score
+class Obstacles:
     def __init__(self, image, type):
         self.image = image
         self.type = type
@@ -142,7 +141,7 @@ class Obstacles: #add so that all obstacles change to military AFTER 1300 score
 
 class SmallCac(Obstacles):
     def __init__(self, image):
-        self.type = random.randint(0, 1)
+        self.type = random.randint(0, 2)
         super().__init__(image, self.type)
         self.rect.y = 325
 
@@ -173,13 +172,12 @@ class Plane(Obstacles):
 
 
 def main():
-    #Vars
     global game_speed, x_pos_bg, y_pos_bg, points, obstacles
-    run = True #for while loop
+    run = True
     clock = pygame.time.Clock()
     player = Dino()
     cloud = Cloud()
-    game_speed = 14
+    game_speed = 13
     x_pos_bg = 0
     y_pos_bg = 380
     points = 0
@@ -187,7 +185,7 @@ def main():
     obstacles = []
     death_count = 0
 
-    def score(): #tracks score on screen
+    def score():
         global points, game_speed
         points += 1
         if points % 100 == 0:
@@ -198,7 +196,7 @@ def main():
         text_rect.center = (1000, 40)
         SCREEN.blit(text, text_rect)
 
-    def background(): #dispalys bg
+    def background():
         global x_pos_bg, y_pos_bg
 
         image_width = BG.get_width()
@@ -220,36 +218,35 @@ def main():
         SCREEN.fill((255, 255, 255))
         user_input = pygame.key.get_pressed()
 
-        player.draw(SCREEN) #draws dino on screen (and keeps drawing it
-        player.update(user_input) #update posotion of din (and hit box)
+        player.draw(SCREEN)
+        player.update(user_input)
 
-        #add cacti / birds  to obstacle list
-        if points <= 500:
+        if points <= 199:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
-                    obstacles.append(SmallCac(SMALL_CAC)) #adds small cactus as first item in list
+                    obstacles.append(SmallCac(SMALL_CAC))
                 elif random.randint(0, 2) == 1:
                     obstacles.append(LargeCac(LARGE_CAC))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Bird(BIRD))
-        elif points >= 501:
+        elif points >= 200:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
-                    obstacles.append(SmallCac(ARMY)) #adds small cactus as first item in list
+                    pass
                 elif random.randint(0, 2) == 1:
-                    obstacles.append(LargeCac(LARGE_CAC))
+                    obstacles.append(LargeCac(ARMY))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Plane(PLANE))
 
-        for i in obstacles: #takes items in obstacle list
-            i.draw(SCREEN) #draws item
+        for i in obstacles:
+            i.draw(SCREEN)
             i.update()
-            if player.dino_rect.colliderect(i.rect): #detect collision with objects
+            if player.dino_rect.colliderect(i.rect):
                 pygame.time.delay(1000)
                 death_count += 1
                 menu(death_count)
 
-        background() #calls bg func to display bg
+        background()
 
         cloud.draw(SCREEN)
         cloud.update()
@@ -289,10 +286,13 @@ def menu(death_count):
 
 menu(death_count=0)
 
+#make larg tank/army etc (3) rpl lrg cac
+#make small army (3) rpl small cac
 
-#tank replace Lrge Cac (3)
-#army replace bird (3) (IN SKY, change y)
+#Planes replace bird class/function (2) (IN SKY, change y)
 
 #add oil
 #add sound/music
 #add flag
+
+#change fonts
