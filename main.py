@@ -1,6 +1,10 @@
+import sys
+
 import pygame
+from pygame import mixer
 import os
 import random
+
 
 pygame.init()
 
@@ -195,6 +199,7 @@ def main():
     death_count = 0
     pos_Y = 1090
 
+
     def score():
         global points, game_speed
         points += 1
@@ -207,7 +212,7 @@ def main():
         SCREEN.blit(text, text_rect)
 
     def background():
-        global x_pos_bg, y_pos_bg
+        global x_pos_bg, y_pos_bg, points
 
         image_width = BG.get_width()
         SCREEN.blit(BG, (x_pos_bg, y_pos_bg))
@@ -219,10 +224,12 @@ def main():
         x_pos_bg -= game_speed
 
 
+
     #game running:
     while run:
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
+                sys.exit()
                 run = False
 
         SCREEN.fill((255, 255, 255))
@@ -230,7 +237,6 @@ def main():
 
         player.draw(SCREEN)
         player.update(user_input)
-
 
 
         if points <= 900:
@@ -244,7 +250,7 @@ def main():
         elif points >= 901 and points <= 1030:
             Oil(OIL, pos_Y).draw(SCREEN)
             pos_Y -= 9
-        elif points >= 1031:
+        elif points >= 1031 and points <=2000:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     pass
@@ -252,6 +258,8 @@ def main():
                     obstacles.append(LargeCac(ARMY))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Plane(PLANE))
+        elif points >= 2001:
+            run = False
 
 
         for i in obstacles:
@@ -261,7 +269,6 @@ def main():
                 pygame.time.delay(1000)
                 death_count += 1
                 menu(death_count)
-
 
         background()
 
@@ -274,13 +281,20 @@ def main():
         pygame.display.update()
 
 
+
+
+
 def menu(death_count):
     global points
+    mixer.music.load("Sounds/Silent30.wav")
+
     run = True
 
     while True:
         SCREEN.fill((255, 255, 255))
         font = pygame.font.Font("freesansbold.ttf", 30)
+        mixer.music.play()
+        mixer.music.queue("Sounds/America.wav")
 
         if death_count == 0:
             text = font.render("Press Any Key", True, (0, 0 ,0))
@@ -296,15 +310,14 @@ def menu(death_count):
         pygame.display.update()
         for i in pygame.event.get():
             if i.type == pygame.QUIT:
-                run = False
+                sys.exit()
             if i.type == pygame.KEYDOWN:
                 main()
+
+
+
 
 
 menu(death_count=0)
 
 
-
-#add sound/music
-
-#add end
