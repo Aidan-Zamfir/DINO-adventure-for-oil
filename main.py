@@ -250,7 +250,7 @@ def main():
         elif points >= 901 and points <= 1030:
             Oil(OIL, pos_Y).draw(SCREEN)
             pos_Y -= 9
-        elif points >= 1031 and points <=2000:
+        elif points >= 1031 and points <=1690:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     pass
@@ -258,7 +258,7 @@ def main():
                     obstacles.append(LargeCac(ARMY))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Plane(PLANE))
-        elif points >= 2001:
+        elif points >= 1700:
             run = False
 
 
