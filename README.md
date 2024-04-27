@@ -2,8 +2,7 @@
 
 ### If you have Python installed:
 
-#### Open terminal
-#### Clone the repo:
+#### Open terminal & clone the repo:
 ```console
 git clone https://github.com/Aidan-Zamfir/DINO-quest-for-oil.git
 ```
