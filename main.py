@@ -16,8 +16,7 @@ DUCK = [pygame.image.load(os.path.join("Assets/Dino", "DinoDuck1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoDuck2.png"))]
 JUMP = pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))
 SMALL_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus1.png")),
-                pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png")),
-                pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus3.png"))]
+                pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png"))]
 LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus2.png")),
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus3.png"))]
@@ -143,7 +142,7 @@ class Obstacles: #add so that all obstacles change to military AFTER 1300 score
 
 class SmallCac(Obstacles):
     def __init__(self, image):
-        self.type = random.randint(0, 2)
+        self.type = random.randint(0, 1)
         super().__init__(image, self.type)
         self.rect.y = 325
 
@@ -165,6 +164,12 @@ class Bird(Obstacles):
             self.index = 0
         SCREEN.blit(self.image[self.index//5], self.rect)
         self.index += 1
+
+class Plane(Obstacles):
+    def __init__(self, image):
+        self.type = random.randint(0, 2)
+        super().__init__(image, self.type)
+        self.rect.y = 230
 
 
 def main():
@@ -219,13 +224,22 @@ def main():
         player.update(user_input) #update posotion of din (and hit box)
 
         #add cacti / birds  to obstacle list
-        if len(obstacles) == 0:
-            if random.randint(0, 2) == 0:
-                obstacles.append(SmallCac(SMALL_CAC)) #adds small cactus as first item in list
-            elif random.randint(0, 2) == 1:
-                obstacles.append(LargeCac(LARGE_CAC))
-            elif random.randint(0, 2) == 2:
-                obstacles.append(Bird(BIRD))
+        if points <= 500:
+            if len(obstacles) == 0:
+                if random.randint(0, 2) == 0:
+                    obstacles.append(SmallCac(SMALL_CAC)) #adds small cactus as first item in list
+                elif random.randint(0, 2) == 1:
+                    obstacles.append(LargeCac(LARGE_CAC))
+                elif random.randint(0, 2) == 2:
+                    obstacles.append(Bird(BIRD))
+        elif points >= 501:
+            if len(obstacles) == 0:
+                if random.randint(0, 2) == 0:
+                    obstacles.append(SmallCac(ARMY)) #adds small cactus as first item in list
+                elif random.randint(0, 2) == 1:
+                    obstacles.append(LargeCac(LARGE_CAC))
+                elif random.randint(0, 2) == 2:
+                    obstacles.append(Plane(PLANE))
 
         for i in obstacles: #takes items in obstacle list
             i.draw(SCREEN) #draws item
@@ -274,3 +288,12 @@ def menu(death_count):
 
 
 menu(death_count=0)
+
+
+#tank replace Lrge Cac
+#army replace small cac
+#plane child class replace bird
+
+#add oil
+#add sound/music
+#add flag
