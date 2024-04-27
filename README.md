@@ -11,7 +11,7 @@ git clone https://github.com/Aidan-Zamfir/DINO-quest-for-oil.git
 ```console
 cd DINO-quest-for-oil 
 ```
-#### Play:
+#### Play (headphone warning):
 ```console
 python3 main.py
 ```
