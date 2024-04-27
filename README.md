@@ -10,7 +10,7 @@ git clone https://github.com/Aidan-Zamfir/DINO-quest-for-oil.git
 ```console
 cd DINO-quest-for-oil 
 ```
-#### Play (headphone warning):
+#### Play (volume up) *headphone warning**:
 ```console
 python3 main.py
 ```
