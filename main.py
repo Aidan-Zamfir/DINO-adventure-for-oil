@@ -290,9 +290,8 @@ def menu(death_count):
 menu(death_count=0)
 
 
-#tank replace Lrge Cac
-#army replace small cac
-#plane child class replace bird
+#tank replace Lrge Cac (3)
+#army replace bird (3) (IN SKY, change y)
 
 #add oil
 #add sound/music
