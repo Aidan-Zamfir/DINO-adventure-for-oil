@@ -22,9 +22,9 @@ LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")
                 pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus2.png"))]
 BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
             pygame.image.load(os.path.join("Assets/Bird", "Bird2.png"))]
-PLANE = [pygame.image.load(os.path.join("Assets/Plane", "Freedom1.png")),
-            pygame.image.load(os.path.join("Assets/Plane", "Freedom2.png")),
-         pygame.image.load(os.path.join("Assets/Plane", "LiberationUnit.png"))]
+# PLANE = [pygame.image.load(os.path.join("Assets/Plane", "Freedom1.png")),
+#             pygame.image.load(os.path.join("Assets/Plane", "Freedom2.png")),
+#          pygame.image.load(os.path.join("Assets/Plane", "LiberationUnit.png"))]
 ARMY = [pygame.image.load(os.path.join("Assets/Army", "Tank2.png")),
             pygame.image.load(os.path.join("Assets/Army", "Tent2.png"))]
 CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
@@ -98,7 +98,7 @@ class Dino:
         self.image = self.jump_img
         if self.dino_jump:
             self.dino_rect.y -= self.jump_velocity * 4
-            self.jump_velocity -= 0.8
+            self.jump_velocity -= 0.6
         if self.jump_velocity < - self.JUMP_VELOCITY:
             self.dino_jump = False
             self.jump_velocity = self.JUMP_VELOCITY
@@ -236,6 +236,7 @@ def main():
                     obstacles.append(LargeCac(ARMY))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Plane(PLANE))
+
 
         for i in obstacles:
             i.draw(SCREEN)
