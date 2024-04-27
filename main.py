@@ -16,18 +16,17 @@ DUCK = [pygame.image.load(os.path.join("Assets/Dino", "DinoDuck1.png")),
            pygame.image.load(os.path.join("Assets/Dino", "DinoDuck2.png"))]
 JUMP = pygame.image.load(os.path.join("Assets/Dino", "DinoJump.png"))
 SMALL_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus1.png")),
-                pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png"))]
+                pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus2.png")),
+             pygame.image.load(os.path.join("Assets/Cactus", "SmallCactus3.png"))]
 LARGE_CAC = [pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus1.png")),
-                pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus2.png")),
-                pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus3.png"))]
+                pygame.image.load(os.path.join("Assets/Cactus", "LargeCactus2.png"))]
 BIRD = [pygame.image.load(os.path.join("Assets/Bird", "Bird1.png")),
             pygame.image.load(os.path.join("Assets/Bird", "Bird2.png"))]
 PLANE = [pygame.image.load(os.path.join("Assets/Plane", "Freedom1.png")),
             pygame.image.load(os.path.join("Assets/Plane", "Freedom2.png")),
          pygame.image.load(os.path.join("Assets/Plane", "LiberationUnit.png"))]
-ARMY = [pygame.image.load(os.path.join("Assets/Army", "Army.png")),
-            pygame.image.load(os.path.join("Assets/Army", "TankM.png")),
-        pygame.image.load(os.path.join("Assets/Army", "Tent.png"))]
+ARMY = [pygame.image.load(os.path.join("Assets/Army", "Tank2.png")),
+            pygame.image.load(os.path.join("Assets/Army", "Tent2.png"))]
 CLOUD = pygame.image.load(os.path.join("Assets/Other", "Cloud.png"))
 BG = pygame.image.load(os.path.join("Assets/Other", "Track.png"))
 
@@ -147,7 +146,7 @@ class SmallCac(Obstacles):
 
 class LargeCac(Obstacles):
     def __init__(self, image):
-        self.type = random.randint(0, 2)
+        self.type = random.randint(0, 1)
         super().__init__(image, self.type)
         self.rect.y = 300
 
@@ -286,7 +285,6 @@ def menu(death_count):
 
 menu(death_count=0)
 
-#make larg tank/army etc (3) rpl lrg cac
 #make small army (3) rpl small cac
 
 #Planes replace bird class/function (2) (IN SKY, change y)
