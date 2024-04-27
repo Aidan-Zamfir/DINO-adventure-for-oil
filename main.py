@@ -165,7 +165,7 @@ class Bird(Obstacles):
 
 class Plane(Obstacles):
     def __init__(self, image):
-        self.type = random.randint(0, 2)
+        self.type = random.randint(0, 1)
         super().__init__(image, self.type)
         self.rect.y = 100
 
@@ -233,7 +233,7 @@ def main():
 
 
 
-        if points <= 250:
+        if points <= 900:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     obstacles.append(SmallCac(SMALL_CAC))
@@ -241,10 +241,10 @@ def main():
                     obstacles.append(LargeCac(LARGE_CAC))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Bird(BIRD))
-        elif points >= 251 and points <= 350:
+        elif points >= 901 and points <= 1030:
             Oil(OIL, pos_Y).draw(SCREEN)
             pos_Y -= 9
-        elif points >= 401:
+        elif points >= 1031:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     pass
@@ -303,12 +303,8 @@ def menu(death_count):
 
 menu(death_count=0)
 
-#make small army (3) rpl small cac
 
-#Planes replace bird class/function (2) (IN SKY, change y)
 
-#add oil
 #add sound/music
-#add flag
 
-#change fonts
+#add end
