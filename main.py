@@ -169,6 +169,16 @@ class Plane(Obstacles):
         super().__init__(image, self.type)
         self.rect.y = 100
 
+class Oil:
+    def __init__(self, image, p_y):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.pos_y = p_y
+
+
+    def draw(self, SCREEN):
+        SCREEN.blit(self.image, (self.pos_y,230))
+
 
 def main():
     global game_speed, x_pos_bg, y_pos_bg, points, obstacles
@@ -183,6 +193,7 @@ def main():
     font = pygame.font.Font('freesansbold.ttf', 20)
     obstacles = []
     death_count = 0
+    pos_Y = 1090
 
     def score():
         global points, game_speed
@@ -220,7 +231,9 @@ def main():
         player.draw(SCREEN)
         player.update(user_input)
 
-        if points <= 199:
+
+
+        if points <= 250:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     obstacles.append(SmallCac(SMALL_CAC))
@@ -228,7 +241,10 @@ def main():
                     obstacles.append(LargeCac(LARGE_CAC))
                 elif random.randint(0, 2) == 2:
                     obstacles.append(Bird(BIRD))
-        elif points >= 200:
+        elif points >= 251 and points <= 350:
+            Oil(OIL, pos_Y).draw(SCREEN)
+            pos_Y -= 9
+        elif points >= 401:
             if len(obstacles) == 0:
                 if random.randint(0, 2) == 0:
                     pass
@@ -245,6 +261,7 @@ def main():
                 pygame.time.delay(1000)
                 death_count += 1
                 menu(death_count)
+
 
         background()
 
