@@ -1,5 +1,7 @@
 # This is a joke...
 
+## User the UP/DOWN arrows to play.
+
 ### If you have Python installed:
 #### Open terminal and install pygame:
 ```console
